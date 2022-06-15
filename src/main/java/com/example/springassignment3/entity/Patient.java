@@ -28,6 +28,7 @@ public class Patient
     @Column(name = "gender")
     private String gender;
 
+
     @ManyToMany
     @JoinTable(name = "patient_test",joinColumns = @JoinColumn(name = "patient_id"),inverseJoinColumns = @JoinColumn(name = "test_id"))
     private List<Test> tests;
