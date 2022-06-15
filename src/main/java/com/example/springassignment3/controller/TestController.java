@@ -22,9 +22,9 @@ public class TestController
     }
 
     @GetMapping("/tests/{testId}")
-    public Optional<Test> getTestById(@PathVariable int theId)
+    public Optional<Test> getTestById(@PathVariable int testId)
     {
-        return theTestService.findTestById(theId);
+        return theTestService.findTestById(testId);
     }
 
     @PostMapping("/tests")
@@ -43,8 +43,8 @@ public class TestController
     }
 
     @DeleteMapping("/tests/{testId}")
-    public void deleteTestById(@PathVariable int theId)
+    public void deleteTestById(@PathVariable int testId)
     {
-        theTestService.deleteTestById(theId);
+        theTestService.deleteTestById(testId);
     }
 }
