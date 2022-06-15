@@ -42,7 +42,7 @@ public class PatientController
         return thePatient;
     }
 
-    @DeleteMapping(value = "/patients/{patientId}")
+    @DeleteMapping("/patients/{patientId}")
     public void deletePatientById(@PathVariable int patientId)
     {
         thePatientService.deletePatientById(patientId);
