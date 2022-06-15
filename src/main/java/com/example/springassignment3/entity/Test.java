@@ -1,10 +1,9 @@
 package com.example.springassignment3.entity;
 
-
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
-
 import javax.persistence.*;
 import java.util.List;
 
@@ -23,11 +22,18 @@ public class Test
     @Column(name = "name")
     private String name;
 
-    @ManyToOne(cascade = {CascadeType.MERGE,CascadeType.DETACH,CascadeType.PERSIST,CascadeType.REFRESH})
-    @JoinColumn(name = "lab_id" , referencedColumnName = "id")
-    private Lab lab;
-
-    @ManyToMany(mappedBy = "tests")
+    @OneToMany(mappedBy = "test")
     private List<Patient> patients;
+
+    @JsonManagedReference
+    public List<Patient> getPatients()
+    {
+        return patients;
+    }
+
+    public void setPatients(List<Patient> patientList)
+    {
+        patients = patientList;
+    }
 
 }

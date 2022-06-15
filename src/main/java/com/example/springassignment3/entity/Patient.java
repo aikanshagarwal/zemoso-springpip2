@@ -1,18 +1,19 @@
 package com.example.springassignment3.entity;
 
+import com.fasterxml.jackson.annotation.*;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import javax.persistence.*;
-import java.util.List;
+import java.io.Serializable;
 
 @Entity
 @Table(name ="patient")
 @Getter
 @Setter
 @NoArgsConstructor
-public class Patient
+public class Patient implements Serializable
 {
     @Id
     @GeneratedValue(strategy= GenerationType.IDENTITY)
@@ -28,9 +29,20 @@ public class Patient
     @Column(name = "gender")
     private String gender;
 
+    @ManyToOne()
+    @JoinColumn(name = "test_id")
+    private Test test;
 
-    @ManyToMany
-    @JoinTable(name = "patient_test",joinColumns = @JoinColumn(name = "patient_id"),inverseJoinColumns = @JoinColumn(name = "test_id"))
-    private List<Test> tests;
+    @JsonBackReference
+    public Test getTest()
+    {
+        return test;
+    }
+
+    public void setTest(Test theTest)
+    {
+        test = theTest;
+    }
+
 
 }
