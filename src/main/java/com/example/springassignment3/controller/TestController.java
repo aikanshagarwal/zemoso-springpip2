@@ -1,6 +1,7 @@
 package com.example.springassignment3.controller;
 
 import com.example.springassignment3.entity.Test;
+import com.example.springassignment3.exception.TestNotFoundException;
 import com.example.springassignment3.service.TestService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -30,7 +31,14 @@ public class TestController
     public Optional<Test> getTestById(@PathVariable int testId)
     {
         logger.info("...Getting a test based on a given Id...");
-        return theTestService.findTestById(testId);
+        Optional<Test> theTest = theTestService.findTestById(testId);
+
+        if(!theTest.isPresent())
+        {
+            throw new TestNotFoundException("Test with id " + testId + " could not be found.");
+        }
+
+        return theTest;
     }
 
     @PostMapping("/tests")
@@ -51,9 +59,19 @@ public class TestController
     }
 
     @DeleteMapping("/tests/{testId}")
-    public void deleteTestById(@PathVariable int testId)
+    public String deleteTestById(@PathVariable int testId)
     {
         logger.info("...Deleting a test given an Id...");
+
+        Optional<Test> theTest = theTestService.findTestById(testId);
+
+        if(!theTest.isPresent())
+        {
+            throw new TestNotFoundException("Test with id " + testId + " could not be found.");
+        }
+
         theTestService.deleteTestById(testId);
+
+        return "The test with the given id was deleted.";
     }
 }

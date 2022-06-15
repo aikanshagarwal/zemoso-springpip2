@@ -1,6 +1,7 @@
 package com.example.springassignment3.controller;
 
 import com.example.springassignment3.entity.Patient;
+import com.example.springassignment3.exception.PatientNotFoundException;
 import com.example.springassignment3.service.PatientService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -30,7 +31,14 @@ public class PatientController
     public Optional<Patient> getPatientById(@PathVariable int patientId)
     {
         logger.info("...Getting patient based on the given Id...");
-        return thePatientService.findPatientById(patientId);
+        Optional<Patient> thePatient = thePatientService.findPatientById(patientId);
+
+        if(!thePatient.isPresent())
+        {
+            throw new PatientNotFoundException("Patient with id " + patientId + " could not be found");
+        }
+
+        return thePatient;
     }
 
     @PostMapping("/patients")
@@ -51,9 +59,17 @@ public class PatientController
     }
 
     @DeleteMapping("/patients/{patientId}")
-    public void deletePatientById(@PathVariable int patientId)
+    public String deletePatientById(@PathVariable int patientId)
     {
         logger.info("...Deleting patient given an Id...");
+        Optional<Patient> thePatient = thePatientService.findPatientById(patientId);
+
+        if(!thePatient.isPresent())
+        {
+            throw new PatientNotFoundException("Patient with id " + patientId + " could not be found");
+        }
+
         thePatientService.deletePatientById(patientId);
+        return "The patient with the given id was deleted.";
     }
 }
