@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Patient Registaration Form</title>
+    <link rel="stylesheet" th:href="@{/css/style.css}">
+    <link rel="stylesheet" th:href="@{/css/toggle-radios.css}">
+</head>
+
+<body>
+<h1>Patient Registration Form</h1>
+<div class="container">
+    <div class="row">
+        <div class="col-10">
+            <label for="booking">Booking for:</label>
+        </div>
+        <div class="toggle-radio">
+            <input type="radio" name="default" id="default_Option1" value="Option1" checked>
+            <label for="default_Option1">Myself</label>
+            <input type="radio" name="default" id="default_Option2" value="Option2" >
+            <label for="default_Option2">Mother</label>
+            <input type="radio" name="default" id="default_Option3" value="Option3">
+            <label for="default_Option3">Father</label>
+            <input type="radio" name="default" id="default_Option4" value="Option4">
+            <label for="default_Option4">Son</label>
+            <input type="radio" name="default" id="default_Option5" value="Option5">
+            <label for="default_Option5">Daughter</label>
+            <input type="radio" name="default" id="default_Option6" value="Option6">
+            <label for="default_Option6">Others</label>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-10">
+            <label for="name">Name:</label>
+        </div>
+        <div class="col-90">
+            <input type="text" id="name" name="name" placeholder="Enter your Name">
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-10">
+            <label for="gender" required>Gender:</label>
+        </div>
+        <div class="col-90">
+            <input type="radio" id="male" name="gender" value="male"/>Male
+            <input type="radio" id="female" name="gender" value="female"/>Female
+            <input type="radio" id="others" name="gender" value="others"/>Others
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-10">
+            <label for="dob">Date Of Birth:</label>
+        </div>
+        <div class="col-90">
+            <input type="Date" id="dob" name="dob">
+        </div>
+    </div>
+    <div class="row">
+        <input type="checkbox" id="save" name="save" value="save">
+        <label for="save">Save details for future</label><br>
+    </div>
+    <div class="row">
+        <input type="submit" value="Add Patient" onclick="SaveStudentDetails()">
+    </div>
+</div>
+</body>
+</html>

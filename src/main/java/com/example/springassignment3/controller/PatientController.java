@@ -7,6 +7,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.servlet.ModelAndView;
 
 import java.util.List;
 import java.util.Optional;
@@ -19,6 +20,14 @@ public class PatientController
     PatientService thePatientService;
 
     Logger logger = LoggerFactory.getLogger(PatientController.class);
+
+    @RequestMapping("/index")
+    public ModelAndView index ()
+    {
+        ModelAndView modelAndView = new ModelAndView();
+        modelAndView.setViewName("patient-form");
+        return modelAndView;
+    }
 
     @GetMapping("/patients")
     public List<Patient> getPatientList()

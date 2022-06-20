@@ -11,6 +11,8 @@ import org.mockito.Mock;
 import org.mockito.Mockito;
 import org.mockito.MockitoAnnotations;
 import org.springframework.boot.test.context.SpringBootTest;
+
+import java.util.Date;
 import java.util.Optional;
 
 @SpringBootTest
@@ -34,8 +36,8 @@ public class PatientService
         Patient thePatient = new Patient();
         thePatient.setId(1);
         thePatient.setName("Ravi");
-        thePatient.setAge(25);
-        thePatient.setGender("M");
+        thePatient.setBookingFor("Myself");
+        thePatient.setGender("Male");
 
         patientService.savePatient(thePatient);
 
@@ -50,8 +52,8 @@ public class PatientService
         Patient thePatient = new Patient();
         thePatient.setId(1);
         thePatient.setName("Ravi");
-        thePatient.setAge(25);
-        thePatient.setGender("M");
+        thePatient.setBookingFor("Myself");
+        thePatient.setGender("Male");
 
         Mockito.when(patientRepository.findById(1)).thenReturn(Optional.of(thePatient));
 
@@ -59,8 +61,8 @@ public class PatientService
 
         Assertions.assertEquals(1,patient.get().getId());
         Assertions.assertEquals("Ravi",patient.get().getName());
-        Assertions.assertEquals(25,patient.get().getAge());
-        Assertions.assertEquals("M",patient.get().getGender());
+        Assertions.assertEquals("Myself",patient.get().getBookingFor());
+        Assertions.assertEquals("Male",patient.get().getGender());
     }
 
     @Test
@@ -69,8 +71,8 @@ public class PatientService
         Patient thePatient = new Patient();
         thePatient.setId(1);
         thePatient.setName("Ravi");
-        thePatient.setAge(25);
-        thePatient.setGender("M");
+        thePatient.setBookingFor("Myself");
+        thePatient.setGender("Male");
 
         patientService.deletePatientById(1);
         Mockito.verify(patientRepository).deleteById(1);

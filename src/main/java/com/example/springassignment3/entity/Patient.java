@@ -7,6 +7,7 @@ import lombok.Setter;
 
 import javax.persistence.*;
 import java.io.Serializable;
+import java.util.Date;
 
 @Entity
 @Table(name ="patient")
@@ -23,11 +24,15 @@ public class Patient implements Serializable
     @Column(name = "name")
     private String name;
 
-    @Column(name = "age")
-    private int age;
+    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern="yyyy-MM-dd" , timezone = "IST")
+    @Column(name = "dob")
+    private Date dob;
 
     @Column(name = "gender")
     private String gender;
+
+    @Column(name = "booking_for")
+    private String bookingFor;
 
     @ManyToOne()
     @JoinColumn(name = "test_id")
