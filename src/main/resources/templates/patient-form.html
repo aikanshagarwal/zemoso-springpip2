@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity3">
+<head>
+    <meta charset="UTF-8">
+    <title>Patient Registration Form</title>
+    <link rel="stylesheet" th:href="@{/css/style.css}">
+    <link rel="stylesheet" th:href="@{/css/toggle-radios.css}">
+</head>
+
+<body>
+<h1>Patient Registration Form</h1>
+<div class="container">
+    <form action="#" th:action="@{/patients/save}" th:object="${thePatient}" method="POST">
+        <input type="hidden" th:field="*{id}"/>
+    <div class="row">
+        <div class="col-10">
+            <label>Booking for:</label>
+        </div>
+        <div class="toggle-radio">
+            <input type="radio" id="bookingFor1" value="Myself" th:field ="*{bookingFor}">
+            <label for="bookingFor1">Myself</label>
+            <input type="radio" id="bookingFor2" value="Mother" th:field ="*{bookingFor}">
+            <label for="bookingFor2">Mother</label>
+            <input type="radio" id="bookingFor3" value="Father" th:field ="*{bookingFor}">
+            <label for="bookingFor3">Father</label>
+            <input type="radio" id="bookingFor4" value="Son" th:field ="*{bookingFor}">
+            <label for="bookingFor4">Son</label>
+            <input type="radio" id="bookingFor5" value="Daughter" th:field ="*{bookingFor}">
+            <label for="bookingFor5">Daughter</label>
+            <input type="radio" id="bookingFor6" value="Others" th:field ="*{bookingFor}">
+            <label for="bookingFor6">Others</label>
+            <span style="color:red" th:if="${#fields.hasErrors('bookingFor')}" th:errors="*{bookingFor}">Booking For Error</span>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-10">
+            <label for="name">Name:</label>
+        </div>
+        <div class="col-90">
+            <input type="text" id="name" placeholder="Enter your Name" th:field ="*{name}">
+            <span style="color:red" th:if="${#fields.hasErrors('name')}" th:errors="*{name}">Name Error</span>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-10">
+            <label>Gender:</label>
+        </div>
+        <div class="col-90">
+            <input type="radio" id="male" value="Male" th:field ="*{gender}"/>Male
+            <input type="radio" id="female" value="Female" th:field ="*{gender}"/>Female
+            <input type="radio" id="others" value="Others" th:field ="*{gender}"/>Others
+            <span style="color:red" th:if="${#fields.hasErrors('gender')}" th:errors="*{gender}">Gender Error</span>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-10">
+            <label for="dob">Date Of Birth:</label>
+        </div>
+        <div class="col-90">
+            <input type="Date" id="dob" name="dob" th:field ="*{dob}">
+            <span style="color:red" th:if="${#fields.hasErrors('dob')}" th:errors="*{dob}">Dob Error</span>
+        </div>
+    </div>
+    <div class="row">
+        <input type="checkbox" id="save" name="save" value="save">
+        <label for="save">Save details for future</label><br>
+    </div>
+    <div class="row">
+        <input type="submit" value="Add Patient">
+    </div>
+    </form>
+</div>
+</body>
+</html>
