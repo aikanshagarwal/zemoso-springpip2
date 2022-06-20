@@ -7,7 +7,7 @@ import lombok.Setter;
 
 import javax.persistence.*;
 import java.io.Serializable;
-import java.util.Date;
+import javax.validation.constraints.NotEmpty;
 
 @Entity
 @Table(name ="patient")
@@ -21,16 +21,20 @@ public class Patient implements Serializable
     @Column(name = "id")
     private int id;
 
+    @NotEmpty(message = "Please enter your Name")
     @Column(name = "name")
     private String name;
 
+    @NotEmpty(message = "Please enter your Date of Birth")
     @JsonFormat(shape = JsonFormat.Shape.STRING, pattern="yyyy-MM-dd" , timezone = "IST")
     @Column(name = "dob")
-    private Date dob;
+    private String dob;
 
+    @NotEmpty(message = "Please select your Gender")
     @Column(name = "gender")
     private String gender;
 
+    @NotEmpty(message = "Please select the person for whom you are booking the test")
     @Column(name = "booking_for")
     private String bookingFor;
 

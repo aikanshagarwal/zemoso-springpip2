@@ -13,12 +13,12 @@ import java.util.Optional;
 
 @RestController
 @RequestMapping("/test-management")
-public class TestController
+public class TestRestController
 {
     @Autowired
     TestService theTestService;
 
-    Logger logger = LoggerFactory.getLogger(TestController.class);
+    Logger logger = LoggerFactory.getLogger(TestRestController.class);
 
     @GetMapping("/tests")
     public List<Test> getTestList()
